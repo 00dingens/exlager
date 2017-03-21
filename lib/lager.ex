@@ -63,6 +63,9 @@ defmodule Lager do
     end
   end
 
+  defp dispatch(level, module, name, line, format, args, meta) when is_list(meta) do
+     dispatch(level, module, name, line, format, args, :maps.from_list(quote do: meta)) 
+  end
   defp dispatch(level, module, name, line, format, args, meta) do
     level_pot = level2pot(level)
     quote do
